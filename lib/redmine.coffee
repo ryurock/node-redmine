@@ -1,3 +1,5 @@
+request = require 'request'
+
 class Redmine
   instance = null
   options  = {}
@@ -20,17 +22,17 @@ class Redmine
     constructor : (opts) ->
       _host = opts.host
       _key  = opts.key
-      @options opts
+      @auth opts.auth if opts.auth?
 
-    options : (opts) ->
-      _auth = opts.auth if opts.auth?
+    auth : (auth) ->
+      _auth = auth
 
     connection : (name, opts = {}) ->
       connection = new Connection(name, opts)
 
     class Connection
       constructor : (name, opts) ->
-      
+
     class Issue
       constructor : (opts) ->
         throw new Error "issue must be issue_id reuired." unless opts.id
